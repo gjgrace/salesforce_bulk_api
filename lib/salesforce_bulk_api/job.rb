@@ -12,7 +12,6 @@ module SalesforceBulkApi
       @external_field = args[:external_field]
       @records        = args[:records]
       @connection     = args[:connection]
-      @concurrency    = args[:options].fetch(:concurrency,'Serial')
       @batch_ids      = []
       @XML_HEADER     = '<?xml version="1.0" encoding="utf-8" ?>'
     end
@@ -29,7 +28,7 @@ module SalesforceBulkApi
       if !@external_field.nil?
         xml += "<externalIdFieldName>#{@external_field}</externalIdFieldName>"
       end
-      xml += "<concurrencyMode>#{@concurrency}</concurrencyMode>"
+      xml += "<concurrencyMode>Serial</concurrencyMode>"
       xml += "<contentType>XML</contentType>"
       xml += "</jobInfo>"
 
